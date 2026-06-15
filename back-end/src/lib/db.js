@@ -1,18 +1,20 @@
 import mongoose from "mongoose";
+import colors from 'colors';
+
 
 const connectDB = async () => {
     try {
         const URL = process.env.MONGO_DB_URL;
-        
+
         if (!URL)
-            throw new Error("MONGO_DB_URL is required");
+            throw new Error("MONGO_DB_URL is required".red);
 
         await mongoose.connect(URL);
 
-        console.log("Connected to DB")
+        console.log("Connected to DB".green)
     } catch (err) {
 
-        console.error("MongoDB connection error", err);
+        console.error("MongoDB connection error".bgRed, err);
 
         process.exit(1);
 
