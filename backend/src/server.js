@@ -18,7 +18,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // 3. FIX: Steps out of 'dist' (or 'src' locally) into the root folder where 'public' is guaranteed to exist
-const publicDir = path.join(__dirname, "../public");
+// Steps up TWO levels: out of 'dist/server.js' and out of 'backend' to reach the root '/app/public'
+const publicDir = path.join(__dirname, "../../public");
 
 app.use(express.json());
 app.use(clerkMiddleware());
