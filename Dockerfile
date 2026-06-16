@@ -34,9 +34,9 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3001
 
-# Install only production dependencies for the backend
-COPY backend/package.json backend/package-lock.json ./backend/
-RUN cd backend && npm install --omit=dev --no-audit --no-fund && npm cache clean --force
+# Copy backend package files directly into the root app directory so Express can be found
+COPY backend/package.json backend/package-lock.json ./
+RUN npm install --omit=dev --no-audit --no-fund && npm cache clean --force
 
 # Copy the compiled backend build from Stage 2
 COPY --from=backend-build /app/backend/dist ./dist
