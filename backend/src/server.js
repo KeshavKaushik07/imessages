@@ -4,11 +4,15 @@ import connectDB from "./lib/db.js";
 import colors from 'colors';
 import { clerkMiddleware } from '@clerk/express';
 import cors from 'cors';
+import clerkWebHooks from './webhooks/clerk.webhook.js';
 
 const app = express();
 
 const PORT = process.env.PORT || 4000;
 const FRONTEND_URL = process.env.FRONTEND_URL;
+
+// we do not have to parse webhooks or clerk data it shoul be in raw format only
+app.use("/api/webhooks",express.raw({type:"application/json"}),clerkWebHooks);
 
 app.use(express.json());
 app.use(clerkMiddleware());
