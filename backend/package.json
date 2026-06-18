@@ -3,22 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-"scripts": {
-  "start": "node src/server.js",
-  "dev": "node --watch src/server.js"
-},
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
     "@clerk/express": "^2.1.26",
+    "@imagekit/nodejs": "^7.7.0",
     "colors": "^1.4.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.7.0",
+    "multer": "^2.2.0",
     "nodemon": "^3.1.14"
   }
 }

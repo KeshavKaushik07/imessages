@@ -6,6 +6,7 @@ import { clerkMiddleware } from '@clerk/express';
 import cors from 'cors';
 import clerkWebHooks from './webhooks/clerk.webhook.js';
 import authRoutes from './routes/auth.routes.js';
+import messageRoutes from './routes/messages.routes.js';
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.get('/health', (req, resp) => {
 });
 
 app.use("/api/auth",authRoutes);
+app.use("/api/messages",messageRoutes);
 
 // --- REMOVED ALL THE FS.EXISTS / PUBLIC STATIC COPIES FROM HERE ---
 
