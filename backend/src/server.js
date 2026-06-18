@@ -5,6 +5,7 @@ import colors from 'colors';
 import { clerkMiddleware } from '@clerk/express';
 import cors from 'cors';
 import clerkWebHooks from './webhooks/clerk.webhook.js';
+import authRoutes from './routes/auth.routes.js';
 
 const app = express();
 
@@ -26,6 +27,8 @@ app.use(cors({
 app.get('/health', (req, resp) => {
     resp.status(200).json({ ok: true });
 });
+
+app.use("/api/auth",authRoutes);
 
 // --- REMOVED ALL THE FS.EXISTS / PUBLIC STATIC COPIES FROM HERE ---
 
