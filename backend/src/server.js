@@ -7,8 +7,8 @@ import cors from 'cors';
 import clerkWebHooks from './webhooks/clerk.webhook.js';
 import authRoutes from './routes/auth.routes.js';
 import messageRoutes from './routes/messages.routes.js';
+import { app, server } from "./lib/socket.js";
 
-const app = express();
 
 const PORT = process.env.PORT || 4000;
 const FRONTEND_URL = process.env.FRONTEND_URL;
@@ -34,7 +34,7 @@ app.use("/api/messages",messageRoutes);
 
 // --- REMOVED ALL THE FS.EXISTS / PUBLIC STATIC COPIES FROM HERE ---
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     connectDB();
     console.log(`server is running on PORT ${PORT}`.bgGreen);
 });
