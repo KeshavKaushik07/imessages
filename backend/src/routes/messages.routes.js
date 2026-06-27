@@ -14,6 +14,6 @@ router.get("/conversation",getConversationForSideBar);
 
 router.get("/:id",getMessages);
 
-router.get("/send/:id", upload.single("media"), sendMessage);
+router.post("/send/:id", upload.single("media"), sendMessage);
 
 export default router;
