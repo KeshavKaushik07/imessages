@@ -11,31 +11,36 @@ import { useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 function App() {
-  const { isSignedIn, isLoaded, getToken  } = useAuth();
+  const { isSignedIn, isLoaded, getToken } = useAuth();
 
   const clearAuth = useAuthStore(state => state.clearAuth);
   const checkAuth = useAuthStore(state => state.checkAuth);
   const isCheckingAuth = useAuthStore(state => state.isCheckingAuth);
 
-  useEffect(async ()=>{
-    if(!isLoaded) return;
+  useEffect(() => {
+    if (!isLoaded) return;
 
+    async function init() {
+      if (isSignedIn) {
+        const token = await getToken();
+        console.log("TOKEN:", token);
+        await checkAuth(token);
+      } else {
+        clearAuth();
+      }
+    }
 
-    if(isSignedIn){
-      const token = await getToken();
-      console.log(token);
-     checkAuth(token);
-     }else clearAuth();
-  },[checkAuth,clearAuth,isLoaded,isSignedIn]);
+    init();
+  }, [isLoaded, isSignedIn, getToken, checkAuth, clearAuth]);
 
-  if(!isLoaded || (isSignedIn && isCheckingAuth)) return <PageLoader/>
+  if (!isLoaded || (isSignedIn && isCheckingAuth)) return <PageLoader />
   return (
     <>
       <ThemeProvider>
         <WallpaperProvider>
           <Routes>
-            <Route path='/' element={ isSignedIn ? <ChatPage /> : <Navigate to={"/auth"} replace/>} />
-            <Route path='/auth' element={ !isSignedIn ? <AuthPage /> : <Navigate to={"/"} />} />
+            <Route path='/' element={isSignedIn ? <ChatPage /> : <Navigate to={"/auth"} replace />} />
+            <Route path='/auth' element={!isSignedIn ? <AuthPage /> : <Navigate to={"/"} />} />
           </Routes>
           <Toaster />
         </WallpaperProvider>

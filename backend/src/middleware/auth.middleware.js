@@ -4,6 +4,8 @@ import userModel from "../model/user.model.js";
 export async function protectedRoute(req, resp, next) {
     try {
 
+        console.log(req.headers.authorization);
+
         const { userId } = getAuth(req);
 
         console.log("===== AUTH MIDDLEWARE =====");
