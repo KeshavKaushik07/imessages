@@ -56,6 +56,8 @@ export function useSelectedConversation() {
   const authUser = useAuthStore((state) => state.authUser);
   const onlineUsers = useAuthStore((state) => state.onlineUsers);
 
+  console.log("HOOK RENDER", onlineUsers);
+
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
   const selectedUser = activeConversationId
