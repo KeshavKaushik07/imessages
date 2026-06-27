@@ -6,6 +6,8 @@ export async function protectedRoute(req, resp, next) {
 
         const { userId } = getAuth(req);
 
+        console.log("===== AUTH MIDDLEWARE =====");
+        console.log("userId from Clerk:", userId);
         if (!userId) {
             resp.status(401).json({ success: false, message: "unauthorized user" });
             return;
@@ -21,6 +23,8 @@ export async function protectedRoute(req, resp, next) {
 
             return;
         }
+
+        console.log("Mongo user:", user);
 
         req.user = user;
 
