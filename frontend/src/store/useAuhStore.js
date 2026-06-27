@@ -50,17 +50,17 @@ export const useAuthStore = create((set, get) => ({
             },
         });
 
-        // socket.on("connect", () => {
-        //     console.log("✅ Connected", socket.id);
-        // });
+        socket.on("connect", () => {
+            console.log("✅ Connected", socket.id);
+        });
 
-        // socket.on("disconnect", (reason) => {
-        //     console.log("❌ Disconnected", reason);
-        // });
+        socket.on("disconnect", (reason) => {
+            console.log("❌ Disconnected", reason);
+        });
 
-        // socket.on("connect_error", (err) => {
-        //     console.log("🚨", err.message);
-        // });
+        socket.on("connect_error", (err) => {
+            console.log("🚨", err.message);
+        });
 
         socket.on("getOnlineUsers", (users) => {
             // console.log("ONLINE USERS", users);
