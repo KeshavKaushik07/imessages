@@ -15,13 +15,19 @@ export const setTokenGetter = (fn) => {
 };
 
 axiosInstance.interceptors.request.use(async (config) => {
-    if (getTokenFn) {
-        const token = await getTokenFn();
+  console.log("Interceptor running");
 
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
+  if (getTokenFn) {
+    const token = await getTokenFn();
+
+    console.log("Token:", token);
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
+  } else {
+    console.log("Token getter not set");
+  }
 
-    return config;
+  return config;
 });

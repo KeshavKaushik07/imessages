@@ -5,9 +5,7 @@ import { setTokenGetter } from "../lib/axios";
 export default function AuthInitializer() {
   const { getToken } = useAuth();
 
-  useEffect(() => {
     setTokenGetter(getToken);
-  }, [getToken]);
 
   return null;
 }
