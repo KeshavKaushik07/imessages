@@ -16,14 +16,14 @@ export const useAuthStore = create((set, get) => ({
         try {
             const res = await axiosInstance.get("/auth/check");
 
-            console.log("CHECK AUTH RESPONSE:", res.data);
+            // console.log("CHECK AUTH RESPONSE:", res.data);
 
             set({ authUser: res.data });
 
-            console.log("Calling connectSocket");
+            // console.log("Calling connectSocket");
             console.log(get());
             get().connectSocket(res.data);
-            console.log("Returned from connectSocket");
+            // console.log("Returned from connectSocket");
         } catch (error) {
             console.error("Error in checkAuth:", error);
             set({ authUser: null });
@@ -50,20 +50,20 @@ export const useAuthStore = create((set, get) => ({
             },
         });
 
-        socket.on("connect", () => {
-            console.log("✅ Connected", socket.id);
-        });
+        // socket.on("connect", () => {
+        //     console.log("✅ Connected", socket.id);
+        // });
 
-        socket.on("disconnect", (reason) => {
-            console.log("❌ Disconnected", reason);
-        });
+        // socket.on("disconnect", (reason) => {
+        //     console.log("❌ Disconnected", reason);
+        // });
 
-        socket.on("connect_error", (err) => {
-            console.log("🚨", err.message);
-        });
+        // socket.on("connect_error", (err) => {
+        //     console.log("🚨", err.message);
+        // });
 
         socket.on("getOnlineUsers", (users) => {
-            console.log("ONLINE USERS", users);
+            // console.log("ONLINE USERS", users);
 
             set({
                 onlineUsers: users,
